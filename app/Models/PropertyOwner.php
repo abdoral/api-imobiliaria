@@ -10,4 +10,5 @@ class PropertyOwner extends Model
     use HasFactory;
 
     protected $table = 'property_owner';
+    protected $guarded = ['id'];
 }
