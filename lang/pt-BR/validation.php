@@ -16,6 +16,7 @@ return [
     'date' => 'O :attribute não é uma data válida.',
     'email' => 'O :attribute deve ser um endereço de email válido.',
     'enum' => 'O valor selecionado para o :attribute é inválido.',
+    'exists' => 'O valor de :attribute é invalido.',
     'integer' => 'O :attribute deve ser um inteiro.',
     'max' => [
         'array' => 'O :attribute não pode ter mais que :max itens.',

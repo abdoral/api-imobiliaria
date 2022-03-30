@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,10 @@ Route::post('/user/getAccessToken', [UserController::class, 'getAccessToken']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/company/create', [CompanyController::class, 'create']);
+    Route::put('/company/update', [CompanyController::class, 'update']);
+    Route::delete('/company/delete', [CompanyController::class, 'delete']);
 });

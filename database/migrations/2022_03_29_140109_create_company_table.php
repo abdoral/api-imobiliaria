@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('street');
             $table->char('number', 10);
             $table->string('district');
-            $table->string('complement');
+            $table->string('complement')->nullable();
             $table->string('country');
             $table->foreignIdFor(User::class);
             $table->timestamps();
