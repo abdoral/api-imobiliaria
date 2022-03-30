@@ -18,6 +18,8 @@ use App\Http\Controllers\UserController;
 
 Route::post('/user/register', [UserController::class, 'register']);
 
+Route::post('/user/getAccessToken', [UserController::class, 'getAccessToken']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
