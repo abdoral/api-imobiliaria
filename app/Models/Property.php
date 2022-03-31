@@ -10,4 +10,10 @@ class Property extends Model
     use HasFactory;
 
     protected $table = 'property';
+    protected $guarded = ['id', 'property_owners_id'];
+
+    public function owners() {
+        return $this->belongsToMany(PropertyOwner::class, 'owners_property');
+    }
+
 }
