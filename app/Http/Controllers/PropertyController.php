@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\OwnersProperty;
+use App\Models\PropertyOwner;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -52,6 +53,17 @@ class PropertyController extends Controller
     }
 
     public function delete(Request $request){
+        $request->validate([
+            'id' => 'required|integer|exists:property,id'
+        ]);
+
+        Property::destroy($request->id);
+
+        return response()->json(
+            [
+              'message' => 'Imóvel excluído com sucesso'
+            ]
+        , 200);
 
     }
 }

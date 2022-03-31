@@ -42,13 +42,13 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/propertyOwner/update', [PropertyOwnerController::class, 'update']);
     Route::delete('/propertyOwner/delete', [PropertyOwnerController::class, 'delete']);
     Route::get('/propertyOwner', function() {
-        return PropertyOwner::all();
+        return PropertyOwner::with(['propertys'])->get();
     });
 
     Route::post('/property/create', [PropertyController::class, 'create']);
     Route::put('/property/update', [PropertyController::class, 'update']);
     Route::delete('/property/delete', [PropertyController::class, 'delete']);
     Route::get('/property', function() {
-        return Property::all();
+        return Property::with(['owners'])->get();
     });
 });
