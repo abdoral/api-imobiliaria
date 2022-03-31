@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PropertyOwnerController;
+use App\Http\Controllers\PropertyController;
 use App\Models\Company;
+use App\Models\Property;
 use App\Models\PropertyOwner;
 
 /*
@@ -41,5 +43,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('/propertyOwner/delete', [PropertyOwnerController::class, 'delete']);
     Route::get('/propertyOwner', function() {
         return PropertyOwner::all();
+    });
+
+    Route::post('/property/create', [PropertyController::class, 'create']);
+    Route::put('/property/update', [PropertyController::class, 'update']);
+    Route::delete('/property/delete', [PropertyController::class, 'delete']);
+    Route::get('/property', function() {
+        return Property::all();
     });
 });
