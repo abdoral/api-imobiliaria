@@ -11,4 +11,8 @@ class PropertyOwner extends Model
 
     protected $table = 'property_owner';
     protected $guarded = ['id'];
+
+    public function propertys() {
+        return $this->belongsToMany(Property::class, 'owners_property');
+    }
 }
