@@ -30,25 +30,36 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::middleware('auth:sanctum')->group(function(){
-    Route::post('/company/create', [CompanyController::class, 'create']);
-    Route::put('/company/update', [CompanyController::class, 'update']);
-    Route::delete('/company/delete', [CompanyController::class, 'delete']);
-    Route::get('/company', function() {
-        return Company::all();
+
+    Route::controller(CompanyController::class)->group(function () {
+        Route::post('/company/create', 'create');
+        Route::put('/company/update', 'update');
+        Route::delete('/company/delete', 'delete');
+        Route::get('/company/show/{name?}/{cnpj?}/{orderBy?}/{pg?}', 'index');
     });
 
-    Route::post('/propertyOwner/create', [PropertyOwnerController::class, 'create']);
-    Route::put('/propertyOwner/update', [PropertyOwnerController::class, 'update']);
-    Route::delete('/propertyOwner/delete', [PropertyOwnerController::class, 'delete']);
-    Route::get('/propertyOwner', function() {
-        return PropertyOwner::with(['propertys'])->get();
+    Route::controller(PropertyController::class)->group(function () {
+        Route::post('/property/create', 'create');
+        Route::put('/property/update', 'update');
+        Route::delete('/property/delete', 'delete');
+        Route::get('/property/show/{name?}/{district?}/{orderBy?}/{pg?}', 'index');
     });
 
-    Route::post('/property/create', [PropertyController::class, 'create']);
-    Route::put('/property/update', [PropertyController::class, 'update']);
-    Route::delete('/property/delete', [PropertyController::class, 'delete']);
-    Route::get('/property', function() {
-        return Property::with(['owners'])->get();
+    Route::controller(PropertyOwnerController::class)->group(function () {
+        Route::post('/propertyOwner/create', 'create');
+        Route::put('/propertyOwner/update', 'update');
+        Route::delete('/propertyOwner/delete', 'delete');
+        Route::get('/propertyOwner/show/{name?}/{cpf?}/{orderBy?}/{pg?}', 'index');
     });
+
+    // Route::post('/propertyOwner/create', [PropertyOwnerController::class, 'create']);
+    // Route::put('/propertyOwner/update', [PropertyOwnerController::class, 'update']);
+    // Route::delete('/propertyOwner/delete', [PropertyOwnerController::class, 'delete']);
+    // Route::get('/propertyOwner', function() {
+    //     return PropertyOwner::with(['propertys'])->get();
+    // });
+
+    
 });

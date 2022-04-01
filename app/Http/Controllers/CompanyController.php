@@ -7,6 +7,13 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+
+    public function index(Request $request) {
+        return response()->json([
+            'response' => Company::search($request->all())
+        ]);
+    }
+
     public function create(Request $request){
         $request->validate([
             'name' => 'required|string',

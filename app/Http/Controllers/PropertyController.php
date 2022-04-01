@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+
+    public function index(Request $request) {
+        return response()->json([
+            'response' => Property::search($request->all())
+        ]);
+    }
+
     public function create(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
