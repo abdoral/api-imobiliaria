@@ -7,9 +7,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PropertyOwnerController;
 use App\Http\Controllers\PropertyController;
-use App\Models\Company;
-use App\Models\Property;
-use App\Models\PropertyOwner;
+use App\Http\Controllers\CityController;
+use App\Models\Uf;
+use App\Models\City;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +22,16 @@ use App\Models\PropertyOwner;
 |
 */
 
+// Rotas de registro
 Route::post('/user/register', [UserController::class, 'register']);
-
 Route::post('/user/getAccessToken', [UserController::class, 'getAccessToken']);
+
+//Rodas Estados e Cidades
+Route::get('/uf', function() {
+    return Uf::all();
+});
+
+Route::get('/city/{uf_id?}', [CityController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
