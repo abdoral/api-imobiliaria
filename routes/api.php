@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PropertyOwnerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\PeopleController;
 use App\Models\Uf;
 use App\Models\City;
 
@@ -28,7 +29,7 @@ Route::post('/user/getAccessToken', [UserController::class, 'getAccessToken']);
 
 //Rodas Estados e Cidades
 Route::get('/uf', function() {
-    return Uf::all();
+    return Uf::orderBy('uf')->get();
 });
 
 Route::get('/city/{uf_id?}', [CityController::class, 'index']);
@@ -59,6 +60,11 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::put('/propertyOwner/update', 'update');
         Route::delete('/propertyOwner/delete', 'delete');
         Route::get('/propertyOwner/show/{name?}/{cpf?}/{orderBy?}/{pg?}', 'index');
+    });
+
+    Route::controller(PeopleController::class)->group(function () {
+        Route::post('/people/create', 'create');
+        Route::get('/people/show', 'index');
     });
 
     // Route::post('/propertyOwner/create', [PropertyOwnerController::class, 'create']);
