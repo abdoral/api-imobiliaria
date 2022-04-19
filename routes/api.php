@@ -10,7 +10,6 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\PeopleController;
 use App\Models\Uf;
-use App\Models\City;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +33,13 @@ Route::get('/uf', function() {
 
 Route::get('/city/{uf_id?}', [CityController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::middleware('auth:sanctum')->group(function(){
+
+
+    Route::get('/user', function(Request $request) {
+        return $request->user();
+    });
+    Route::post('/logout', [UserController::class, 'deleteAccessToken']);
 
     Route::controller(CompanyController::class)->group(function () {
         Route::post('/company/create', 'create');

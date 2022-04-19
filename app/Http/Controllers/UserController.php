@@ -44,4 +44,12 @@ class UserController extends Controller
         ], 200);
 
     }
+
+    public function deleteAccessToken() {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Tokens Revoked'
+        ];
+    }
 }
